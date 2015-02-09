@@ -1,0 +1,44 @@
+<script>
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+function Donutshop(location, hourlyMin, hourlyMax, insidePercent, averageOrder) {
+  this.location = location;
+  this.insidePercent = insidePercent;
+  this.averageOrder = averageOrder;
+  this.hoursOfOperation = ["7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm"];
+
+  this.trafficPerHour = [];
+
+  this.getHourlyTraffic = function() {
+
+    for (var i = 0; i < this.hoursOfOperation.length; i++) {
+        this.trafficPerHour.push(Math.round(getRandomInt(hourlyMin, hourlyMax) * (insidePercent / 100)));
+        console.log(this.location + " Voodoo Donuts had " + this.trafficPerHour[i] + " customers at " + this.hoursOfOperation[i]);
+
+    }
+
+  };
+
+  this.getTotalDonuts = function() {
+    var totalDonuts = 0;
+    for (var i = 0; i < this.hoursOfOperation.length; i++) {
+      totalDonuts += (this.trafficPerHour[i] * averageOrder)
+
+    }
+    console.log("Today, the " + this.location + " Voodoo Donuts sold " + totalDonuts + " donuts!");
+  }
+}
+
+var downtown = new Donutshop("Downtown", 80, 220, 10, 4);
+var capitolHill = new Donutshop("Capitol Hill", 5, 45, 45, 2);
+var southLakeUnion = new Donutshop("South Lake Union", 180, 250, 5, 6);
+var wedgewood = new Donutshop("Wedgewood", 20, 60, 20, 1.5);
+var ballard = new Donutshop("Ballard", 25, 175, 33, 1);
+
+ballard.getHourlyTraffic();
+ballard.getTotalDonuts();
+
+
+</script>
