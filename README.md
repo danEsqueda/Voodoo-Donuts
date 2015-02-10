@@ -11,15 +11,16 @@ For getting the total donuts sold, I made a function that loops through the traf
 
 Here is an example result from the downtown donut store object: (this is with the price set at $1.25 per donut)
 
-Downtown Voodoo Donuts had 9 customers at 7am
-Downtown Voodoo Donuts had 21 customers at 8am
-Downtown Voodoo Donuts had 18 customers at 9am
-Downtown Voodoo Donuts had 9 customers at 10am
-Downtown Voodoo Donuts had 15 customers at 11am
-Downtown Voodoo Donuts had 9 customers at 12pm
-Downtown Voodoo Donuts had 16 customers at 1pm
-Downtown Voodoo Donuts had 12 customers at 2pm
-Downtown Voodoo Donuts had 8 customers at 3pm
-Downtown Voodoo Donuts had 16 customers at 4pm
-Downtown Voodoo Donuts had 9 customers at 5pm
-Today, the Downtown Voodoo Donuts sold 568 donuts and made 710 dollars!
+Downtown Voodoo Donuts had 
+11 customers at 7am
+15 customers at 8am
+13 customers at 9am
+13 customers at 10am
+8 customers at 11am
+16 customers at 12pm
+18 customers at 1pm
+14 customers at 2pm
+9 customers at 3pm
+21 customers at 4pm
+17 customers at 5pm
+Today, the Downtown Voodoo Donuts sold 620 donuts and made 775 dollars!
