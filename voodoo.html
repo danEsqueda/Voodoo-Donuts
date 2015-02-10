@@ -3,16 +3,16 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-function Donutshop(location, hourlyMin, hourlyMax, insidePercent, averageOrder, donutPrice) {
+function Donutshop(location, hrMin, hrMax, inPercent, avgOrder, donutPrice) {
   this.location = location;
-  this.insidePercent = insidePercent;
-  this.averageOrder = averageOrder;
+  this.inPercent = inPercent;
+  this.avgOrder = avgOrder;
   this.donutPrice = donutPrice;
   this.hoursOfOperation = ["7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"];
 
   this.trafficPerHour = [];
   for (var i = 0; i < this.hoursOfOperation.length; i++) {
-        this.trafficPerHour.push(Math.round(getRandomInt(hourlyMin, hourlyMax) * (insidePercent / 100)));
+        this.trafficPerHour.push(Math.round(getRandomInt(hrMin, hrMax) * (inPercent / 100)));
   }
 
   this.getHourlyTraffic = function() {
@@ -22,12 +22,11 @@ function Donutshop(location, hourlyMin, hourlyMax, insidePercent, averageOrder, 
     }
   };
 
-
   this.getTotalDonuts = function() {
     var totalDonuts = 0;
     var profit = 0;
     for (var i = 0; i < this.hoursOfOperation.length; i++) {
-      totalDonuts += (this.trafficPerHour[i] * averageOrder);
+      totalDonuts += (this.trafficPerHour[i] * avgOrder);
       profit = totalDonuts * this.donutPrice;
     }
     console.log("Today, the " + this.location + " Voodoo Donuts sold " + totalDonuts + " donuts and made " + profit + " dollars!");
@@ -36,11 +35,11 @@ function Donutshop(location, hourlyMin, hourlyMax, insidePercent, averageOrder, 
   };
 };
 
-var downtown = new Donutshop("Downtown", 80, 220, 10, 4, 1.25);
-var capitolHill = new Donutshop("Capitol Hill", 5, 45, 45, 2);
-var southLakeUnion = new Donutshop("South Lake Union", 180, 250, 5, 6);
-var wedgewood = new Donutshop("Wedgewood", 20, 60, 20, 1.5);
-var ballard = new Donutshop("Ballard", 25, 175, 33, 1);
+var downtown = new Donutshop("Downtown", 80, 220, 10, 4, 1.25),
+    capitolHill = new Donutshop("Capitol Hill", 5, 45, 45, 2),
+    southLakeUnion = new Donutshop("South Lake Union", 180, 250, 5, 6),
+    wedgewood = new Donutshop("Wedgewood", 20, 60, 20, 1.5),
+    ballard = new Donutshop("Ballard", 25, 175, 33, 1);
 
 downtown.getHourlyTraffic();
 downtown.getTotalDonuts();
