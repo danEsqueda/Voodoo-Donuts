@@ -1,4 +1,3 @@
-
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
@@ -10,58 +9,89 @@ function Donutshop(location, hrMin, hrMax, inPercent, avgOrder, donutPrice) {
   this.donutPrice = donutPrice;
   this.hoursOfOperation = ["7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"];
   this.trafficPerHour = [];
+
   for (var i = 0; i < this.hoursOfOperation.length; i++) {
-      this.trafficPerHour[i] = getRandomInt(hrMin, hrMax);
-    }
+    this.trafficPerHour[i] = getRandomInt(hrMin, hrMax);
+  }
 
   this.getFootTotal = function() {
     var footTotal = 0;
+
     for (var i = 0; i < this.hoursOfOperation.length; i++) {
       footTotal += this.trafficPerHour[i];
     }
+
     return footTotal;
   }
 
   this.getHourlyCustomers = function() {
     var customers = [];
+
     for (var i = 0; i < this.hoursOfOperation.length; i++) {
       customers[i] = Math.round(this.trafficPerHour[i] * (inPercent / 100));
     }
+
     return customers;
   }
 
   this.getTotalCustomers = function() {
-    var total = 0;
-    total += Math.round(this.getFootTotal() * (inPercent / 100));
-    return total;
+    return Math.round(this.getFootTotal() * (inPercent / 100));
   }
 
   this.getHourlyDonuts = function() {
     var donuts = [];
+
     for (var i = 0; i < this.hoursOfOperation.length; i++) {
       donuts[i] = this.getHourlyCustomers()[i] * avgOrder;
     }
+
     return donuts;
   }
 
   this.getTotalDonuts = function() {
-    var total = 0;
-    total += this.getTotalCustomers() * avgOrder;
-    return total;
+    return this.getTotalCustomers() * avgOrder;
   }
 
   this.getHourlyProfit = function() {
     var profit = [];
+
     for (var i = 0; i < this.hoursOfOperation.length; i++) {
       profit[i] = this.getHourlyDonuts()[i] * this.donutPrice;
     }
+
     return profit;
   }
 
   this.getTotalProfit = function() {
-    var total = 0;
-    total = this.getTotalDonuts() * this.donutPrice;
-    return total;
+    return this.getTotalDonuts() * this.donutPrice;
+  }
+
+  this.hourlyReport = function() {
+    var tdList = document.querySelectorAll('td');
+
+    for (var i = 0; i < tdList.length; i++) {
+      tdList[i].remove();
+    }
+
+    for (var i = 0; i < this.hoursOfOperation.length; i++) {
+      var trEl = document.getElementById(this.hoursOfOperation[i]);
+
+      var cell1 = document.createElement('td');
+      cell1.textContent = this.trafficPerHour[i];
+      trEl.appendChild(cell1);
+
+      var cell2 = document.createElement('td');
+      cell2.textContent = this.getHourlyCustomers()[i];
+      trEl.appendChild(cell2);
+
+      var cell3 = document.createElement('td');
+      cell3.textContent = this.getHourlyDonuts()[i];
+      trEl.appendChild(cell3);
+
+      var cell4 = document.createElement('td');
+      cell4.textContent = this.getHourlyProfit()[i];
+      trEl.appendChild(cell4);
+    }
   }
 };
 
@@ -71,95 +101,54 @@ var downtown = new Donutshop("Downtown", 80, 220, 10, 4, 1.25),
     wedgewood = new Donutshop("Wedgewood", 20, 60, 20, 1.5, 1.25),
     ballard = new Donutshop("Ballard", 25, 175, 33, 1, 1.25);
 
-
-hourlyReport = function(location) {
-      var hrList = document.getElementsByClassName('time');
-      for (var i = 0; i < location.hoursOfOperation.length; i++) {
-        var cell1 = document.createElement('td');
-        cell1.textContent = location.trafficPerHour[i];
-        hrList[i].appendChild(cell1);
-
-        var cell2 = document.createElement('td');
-        cell2.textContent = location.getHourlyCustomers()[i];
-        hrList[i].appendChild(cell2);
-
-        var cell3 = document.createElement('td');
-        cell3.textContent = location.getHourlyDonuts()[i];
-        hrList[i].appendChild(cell3);
-
-        var cell4 = document.createElement('td');
-        cell4.textContent = location.getHourlyProfit()[i];
-        hrList[i].appendChild(cell4);
-      }
-}
-
-
-totalReport = function(location) {
+function totalReport(location) {
   var total = document.getElementById('total'),
       cell1 = document.createElement('td'),
       cell2 = document.createElement('td'),
       cell3 = document.createElement('td'),
       cell4 = document.createElement('td');
-  cell1.textContent = location.getFootTotal();
-  cell2.textContent = location.getTotalCustomers();
-  cell3.textContent = location.getTotalDonuts();
-  cell4.textContent = location.getTotalProfit();
-  total.appendChild(cell1);
-  total.appendChild(cell2);
-  total.appendChild(cell3);
-  total.appendChild(cell4);
+
+      cell1.textContent = location.getFootTotal();
+      cell2.textContent = location.getTotalCustomers();
+      cell3.textContent = location.getTotalDonuts();
+      cell4.textContent = location.getTotalProfit();
+
+      total.appendChild(cell1);
+      total.appendChild(cell2);
+      total.appendChild(cell3);
+      total.appendChild(cell4);
 }
-
-
 
 function generateReport() {
   var sel = this.options[this.selectedIndex].value;
 
   switch (sel) {
     case "downtown":
-      hourlyReport(downtown);
+      downtown.hourlyReport();
       totalReport(downtown);
       break;
 
     case "capitolHill":
-      hourlyReport(capitolHill);
+      capitolHill.hourlyReport();
       totalReport(capitolHill);
       break;
 
     case "southLakeUnion":
-      hourlyReport(southLakeUnion);
+      southLakeUnion.hourlyReport();
       totalReport(southLakeUnion);
       break;
 
     case "wedgewood":
-      hourlyReport(wedgewood);
+      wedgewood.hourlyReport();
       totalReport(wedgewood);
       break;
 
     case "ballard":
-      hourlyReport(ballard);
+      ballard.hourlyReport();
       totalReport(ballard);
       break;
   }
 }
 
-
 var elSelect = document.getElementById('store');
 elSelect.addEventListener('change', generateReport, false);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var button = document.getElementById('report');
-// button.addEventListener('submit', report, false);
