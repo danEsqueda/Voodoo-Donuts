@@ -1,18 +1,36 @@
 
 body {
-  font-family: Arial, Verdana, sans-serif;
+  font-family: 'Playfair Display', serif;
   color:#111111;
-  background-color: #acf0f2;
+  margin: 0 auto;
+  /*background-image: url("donut.jpeg");*/
+  }
+
+
+h1 {
+
+  font-weight: bold;
+  font-style: italic;
+  padding: 0px 0px 10px 50px;
+  display: inline-block;
 }
 
-table {
-  margin-top: 40px;
+h3 {
+
+  display: inline-block;
+  position: relative;
+  left: 100px;
 }
 
-h2 {
-  width: 300px;
-  float: left;
-  margin: 10px;
+#logo {
+  overflow: auto;
+}
+
+#form {
+  display: inline-block;
+  position: relative;
+  left: 100px;
+
 }
 
 
@@ -25,21 +43,19 @@ h2 {
   border-top: 2px solid #111111;
 }
 
-th {
+th, td {
   padding: 5px 10px 10px 10px;
   text-align: center;
   font-size: 90%;
   letter-spacing: 0.1em;
   width: 150px;
-
 }
 
-td {
-  padding: 5px 10px 10px 10px;
-  text-align: center;
-  font-size: 90%;
-  letter-spacing: 0.1em;
-  width: 150px;
+th:hover {
+  background-color: #eb7f00;
+  color: #ffffff;
+  text-shadow: 2px 2px 7px #111111;
+  box-shadow: 0px 0px 6px rgba(0,0,0,.5);
 }
 
 td:hover {
@@ -48,10 +64,9 @@ td:hover {
   text-shadow: 2px 2px 7px #111111;
   box-shadow: 0px 0px 6px rgba(0,0,0,.5);
 }
-th:hover {
-  background-color: #eb7f00;
-  color: #ffffff;
-  text-shadow: 2px 2px 7px #111111;
-  box-shadow: 0px 0px 6px rgba(0,0,0,.5);
+
+h5 {
+  text-align: center;
+
 }
 

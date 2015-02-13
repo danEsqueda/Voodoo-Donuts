@@ -3,26 +3,34 @@
     <head>
       <title>Voodoo Donuts</title>
       <link rel="stylesheet" href="main.css">
+      <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,900italic' rel='stylesheet' type='text/css'>
+
     </head>
-
     <body>
+
+      <div id="header">
       <header>
+        <div id="logo">
+          <h1>VOODOO DONUTS</h1>
+          <h3>Choose A Store:</h3>
+          <div id="form">
 
-
-              <h2>Choose a Store Location</h2>
-
-              <form>
-                <select id="store">
-                  <option value=""></option>
-                  <option value="downtown">Downtown</option>
-                  <option value="capitolHill">Capitol Hill</option>
-                  <option value="southLakeUnion">South Lake Union</option>
-                  <option value="wedgewood">Wedgewood</option>
-                  <option value="ballard">Ballard</option>
-                </select>
-              </form>
+            <form>
+              <select id="store">
+                <option value=""></option>
+                <option value="downtown">Downtown</option>
+                <option value="capitolHill">Capitol Hill</option>
+                <option value="southLakeUnion">South Lake Union</option>
+                <option value="wedgewood">Wedgewood</option>
+                <option value="ballard">Ballard</option>
+              </select>
+            </form>
+          </div>
+        </div>
 
       </header>
+    </div>
+    <div id="table">
       <table id="main">
         <thead>
           <tr>
@@ -71,10 +79,13 @@
         <tfoot>
           <tr id="total">
             <th>Total</th>
-
           </tr>
         </tfoot>
       </table>
+      </div>
+      <footer>
+        <h5>&copy; Dan Esqueda Design</h5>
+      </footer>
       <script src="voodoo.js"></script>
     </body>
   </html>
