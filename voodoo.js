@@ -150,5 +150,18 @@ function generateReport() {
   }
 }
 
+function clickStay(e) {
+  var target;
+  target = e.target;
+  console.log(target);
+  if (target.className == '') {
+  target.className = 'click';
+} else {
+  target.className = '';
+}
+}
+
 var elSelect = document.getElementById('store');
 elSelect.addEventListener('change', generateReport, false);
+var elClick = document.getElementById('main');
+elClick.addEventListener('click', clickStay, false);
