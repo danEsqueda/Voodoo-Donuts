@@ -67,10 +67,13 @@ function Donutshop(location, hrMin, hrMax, inPercent, avgOrder, donutPrice) {
   }
 
   this.hourlyReport = function() {
-    $('td').remove();
+    var tdList = document.querySelectorAll('td');
+
+    for (var i = 0; i < tdList.length; i++) {
+      tdList[i].remove();
+    }
 
     for (var i = 0; i < this.hoursOfOperation.length; i++) {
-
       var trEl = document.getElementById(this.hoursOfOperation[i]);
 
       var cell1 = document.createElement('td');
@@ -88,11 +91,8 @@ function Donutshop(location, hrMin, hrMax, inPercent, avgOrder, donutPrice) {
       var cell4 = document.createElement('td');
       cell4.textContent = this.getHourlyProfit()[i];
       trEl.appendChild(cell4);
-
     }
   }
-
-
 };
 
 var downtown = new Donutshop("Downtown", 80, 220, 10, 4, 1.25),
@@ -101,38 +101,31 @@ var downtown = new Donutshop("Downtown", 80, 220, 10, 4, 1.25),
     wedgewood = new Donutshop("Wedgewood", 20, 60, 20, 1.5, 1.25),
     ballard = new Donutshop("Ballard", 25, 175, 33, 1, 1.25);
 
-
-
 function totalReport(location) {
+  var total = document.getElementById('total'),
+      cell1 = document.createElement('td'),
+      cell2 = document.createElement('td'),
+      cell3 = document.createElement('td'),
+      cell4 = document.createElement('td');
 
-  $('#total').append('<td></td>');
-  $('#total > td').text(location.getFootTotal());
-  $('#total').append('<td></td>');
-  $('#total td:nth-child(3)').text(location.getTotalCustomers());
-  $('#total').append('<td></td>');
-  $('#total td:nth-child(4)').text(location.getTotalDonuts());
-  $('#total').append('<td></td>');
-  $('#total td:nth-child(5)').text(location.getTotalProfit());
+      cell1.textContent = location.getFootTotal();
+      cell2.textContent = location.getTotalCustomers();
+      cell3.textContent = location.getTotalDonuts();
+      cell4.textContent = location.getTotalProfit();
 
-  // var methods = [getFootTotal,
-  //               getTotalCustomers,
-  //               getTotalDonuts,
-  //               getTotalProfit];
-
-  // for (var i = 0; i < methods.length; i++) {
-  //   $('#total').append('<td></td>');
-  //   $('#total td:nth-child(i + 1)').text(location.methods[i]());
-  // }
+      total.appendChild(cell1);
+      total.appendChild(cell2);
+      total.appendChild(cell3);
+      total.appendChild(cell4);
 }
 
-
-
 function generateReport() {
-  switch ($('#store').val()) {
+  var sel = this.options[this.selectedIndex].value;
 
+  switch (sel) {
     case "downtown":
-      totalReport(downtown);
       downtown.hourlyReport();
+      totalReport(downtown);
       break;
 
     case "capitolHill":
@@ -155,12 +148,20 @@ function generateReport() {
       totalReport(ballard);
       break;
   }
-};
+}
 
-$('#store').on('change', generateReport);
-$('#main').on('click', function(e){
-  $(e.target).toggleClass('click');
-});
+function clickStay(e) {
+  var target;
+  target = e.target;
+  console.log(target);
+  if (target.className == '') {
+  target.className = 'click';
+} else {
+  target.className = '';
+}
+}
 
-
-
+var elSelect = document.getElementById('store');
+elSelect.addEventListener('change', generateReport, false);
+var elClick = document.getElementById('main');
+elClick.addEventListener('click', clickStay, false);
